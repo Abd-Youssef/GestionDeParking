@@ -38,14 +38,19 @@
                     <Entry Margin="20,0,0,0" VerticalOptions="Center" Placeholder="Password" IsPassword="True" Keyboard="Default" />
                 </Frame>
             </StackLayout>
-
+            <!--<ImageButton Source="menu.png"
+                         VerticalOptions="Start"
+                                            HorizontalOptions="End"
+                                            HeightRequest="50"
+                                            WidthRequest="30"
+                                            Command="{Binding OpenPopupCommand}"/>-->
             <Button Text="Sign In" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" Command="{Binding LoginCommand}" /> 
             <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="Center">
                 <Label Text="Don't have account ?" TextColor="Gray" />
                 <Label Text="Sign Up here" TextColor="#50b3f2"/>
 
             </StackLayout>
-
+            <!--<Button Text="alert" Clicked="DisplayAlert"/>-->
         </VerticalStackLayout>
     </ScrollView>
 

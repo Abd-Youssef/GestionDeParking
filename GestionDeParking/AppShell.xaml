@@ -21,6 +21,10 @@
             <ShellContent ContentTemplate="{DataTemplate local:AddPage}" Route="AddPage"/>
         </Tab>
      </TabBar>
+    <ShellContent
+        Title="Popup Page"
+        ContentTemplate="{DataTemplate local:PopupPage}"
+        Route="PopupPage" />
        
     
     

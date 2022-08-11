@@ -1,7 +1,8 @@
 using GestionDeParking.ViewModel;
 using GestionDeParking.Model;
-namespace GestionDeParking.View;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
+namespace GestionDeParking.View;
 public partial class HomePage : ContentPage
 {
 	public HomePage(HomePageViewModel viewModel)
@@ -9,6 +10,40 @@ public partial class HomePage : ContentPage
 		InitializeComponent();
         this.BindingContext = viewModel;
     }
-    
-    
+    //void OpenPopup()
+    //{
+    //    Shell.Current.GoToAsync($"//{nameof(PopupPage)}");
+    //}
+    public Car car;
+    public async void DisplayActionSheet(object obj, EventArgs eventArgs)
+    {
+        var result =  await DisplayActionSheet(null, "Cancel", null, "Delete", "Modify", "Details");
+        if (result is "Delete")
+        {
+            var Delete=await DisplayAlert("warning", "Are you sure you want to delete this item","Yes", "No");
+            if (Delete is true)
+            {
+                
+                //delete item
+            }  
+        }
+        else if (result is "Details")
+        {
+
+            HomePageViewModel viewModel = new HomePageViewModel();
+            await viewModel.GoToDetails(car);
+            // open details page
+
+            //Car car;
+            //await Shell.Current.GoToAsync($"{nameof(DetailsPage)}", true,
+            //    new Dictionary<String, object>
+            //    {
+            //        {"Car",car }
+            //    });
+        }
+        else if (result is "Modify")
+        {
+            //open modification page
+        }
+    }
 }

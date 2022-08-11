@@ -66,7 +66,8 @@
             </StackLayout>
 
 
-            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" Clicked="OnButtonClicked" />
+            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef"  />
+            <!--Clicked="OnButtonClicked"-->
 
             <CollectionView x:Name="collectionView">
                 <CollectionView.ItemTemplate>

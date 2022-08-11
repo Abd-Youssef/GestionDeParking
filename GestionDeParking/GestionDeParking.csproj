@@ -57,6 +57,7 @@
 	  <None Remove="Resources\Images\icon_password.jpg" />
 	  <None Remove="Resources\Images\login.jpg" />
 	  <None Remove="Resources\Images\maison.png" />
+	  <None Remove="Resources\Images\menu.png" />
 	  <None Remove="Resources\Images\plus.png" />
 	  <None Remove="Resources\Images\profil.png" />
 	  <None Remove="Resources\Images\search.png" />
@@ -81,6 +82,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\PopupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\ProfilPage.xaml">

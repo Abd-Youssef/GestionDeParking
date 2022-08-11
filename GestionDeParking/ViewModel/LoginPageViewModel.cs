@@ -17,5 +17,11 @@ namespace GestionDeParking.ViewModel
         {
             Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
+        //[ICommand]
+        //void OpenPopup()
+        //{
+        //    Shell.Current.GoToAsync($"//{nameof(PopupPage)}");
+        //}
     }
+    
 }
