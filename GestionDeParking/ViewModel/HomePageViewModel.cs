@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GestionDeParking.ViewModel
 {
-    public partial class HomePageViewModel :BaseViewModel
+    public partial class HomePageViewModel : BaseViewModel
     {
         public ObservableCollection<Car> NewCars { get; set; }
         public ObservableCollection<Car> BestCars { get; set; }
@@ -19,12 +19,13 @@ namespace GestionDeParking.ViewModel
         public HomePageViewModel()
         {
             NewCars = new ObservableCollection<Car>();
-            NewCars.Add(new Car { Marque= "VOLKSWAGEN" , Name = " GOLF 8", Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
             NewCars.Add(new Car { Marque = "VOLKSWAGEN", Name = " GOLF 8", Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
+            NewCars.Add(new Car { Marque = "SEAT", Name = "IBIZA", Distance = 30000, Image = "ibiza.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
             NewCars.Add(new Car { Marque = "VOLKSWAGEN", Name = " GOLF 8", Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
             NewCars.Add(new Car { Marque = "VOLKSWAGEN", Name = " GOLF 8", Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
             NewCars.Add(new Car { Marque = "VOLKSWAGEN", Name = " GOLF 8", Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
         }
+
         [ICommand]
         public async Task GoToDetails(Car car)
         {
@@ -36,31 +37,33 @@ namespace GestionDeParking.ViewModel
                     {"Car",car }
                 });
         }
-
         [ICommand]
-        void OpenPopup()
+        public async Task Delete(Car car)
         {
-            Shell.Current.GoToAsync($"//{nameof(PopupPage)}");
+
+            NewCars.Remove(car);
         }
-        /*
-        BestCars = new ObservableCollection<Car>();
-        BestCars.Add(new Car { Name = "BMW", Distance = 30000, Image = "bmw.jpg" });
-        BestCars.Add(new Car { Name = "BMW", Distance = 30000, Image = "bmw.jpg" });
-        BestCars.Add(new Car { Name = "BMW", Distance = 30000, Image = "bmw.jpg" });
-        BestCars.Add(new Car { Name = "BMW", Distance = 30000, Image = "bmw.jpg" });
-        BestCars.Add(new Car { Name = "BMW", Distance = 30000, Image = "bmw.jpg" });
-        BestCars.Add(new Car { Name = "BMW", Distance = 30000, Image = "bmw.jpg" });
 
-        RecommendedCars = new ObservableCollection<Car>();
-        RecommendedCars.Add(new Car { Name = "Mercades", Distance = 30000, Image = "ibiza.jpg" });
-        RecommendedCars.Add(new Car { Name = "Mercades", Distance = 30000, Image = "ibiza.jpg" });
-        RecommendedCars.Add(new Car { Name = "Mercades", Distance = 30000, Image = "ibiza.jpg" });
-        RecommendedCars.Add(new Car { Name = "Mercades", Distance = 30000, Image = "ibiza.jpg" });
-        RecommendedCars.Add(new Car { Name = "Mercades", Distance = 30000, Image = "ibiza.jpg" });
-        RecommendedCars.Add(new Car { Name = "Mercades", Distance = 30000, Image = "ibiza.jpg" });
-        */
+        //public Command<Car> RemoveCar
+        //{
+        //    get
+        //    {
+        //        return new Command<Car>((car) =>
+        //    {
+        //        NewCars.Remove(car);
+        //    });
+        //    }
+
+            /*
+            BestCars = new ObservableCollection<Car>();
+            BestCars.Add(new Car { Name = "BMW", Distance = 30000, Image = "bmw.jpg" });
+
+            RecommendedCars = new ObservableCollection<Car>();
+            RecommendedCars.Add(new Car { Name = "Mercades", Distance = 30000, Image = "ibiza.jpg" });
+            */
 
 
 
+        
     }
 }

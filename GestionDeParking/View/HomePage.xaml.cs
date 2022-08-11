@@ -16,70 +16,9 @@ public partial class HomePage : ContentPage
     //}
 
 
-    //public async void DisplayActionSheet(object obj, EventArgs eventArgs)
-    //{
-    //    var result =  await DisplayActionSheet(null, "Cancel", null, "Delete", "Modify", "Details");
-    //    if (result is "Delete")
-    //    {
-    //        var Delete=await DisplayAlert("warning", "Are you sure you want to delete this item","Yes", "No");
-    //        if (Delete is true)
-    //        {
-    //            //delete item
-    //        }  
-    //    }
-    //    else if (result is "Details")
-    //    {
+    
 
-    //        HomePageViewModel viewModel = new HomePageViewModel();
-    //        await viewModel.GoToDetails(car);
-    //        // open details page
-
-    //        //Car car;
-    //        //await Shell.Current.GoToAsync($"{nameof(DetailsPage)}", true,
-    //        //    new Dictionary<String, object>
-    //        //    {
-    //        //        {"Car",car }
-    //        //    });
-    //    }
-    //    else if (result is "Modify")
-    //    {
-    //        //open modification page
-    //    }
-    //}
-
-    //private async void Carliste_ItemTapped(object sender, SelectedItemChangedEventArgs e)
-    //{
-    //    var car = ((ListView)sender).SelectedItem as Car;
-    //    var result = await DisplayActionSheet(null, "Cancel", null, "Delete", "Modify", "Details");
-    //    if (result is "Delete")
-    //    {
-    //        var Delete = await DisplayAlert("warning", "Are you sure you want to delete this item", "Yes", "No");
-    //        if (Delete is true)
-    //        {
-    //            delete item
-    //        }
-    //    }
-    //    else if (result is "Details")
-    //    {
-
-    //        HomePageViewModel viewModel = new HomePageViewModel();
-    //        await viewModel.GoToDetails(car);
-    //        open details page
-
-    //       Car car;
-    //        await Shell.Current.GoToAsync($"{nameof(DetailsPage)}", true,
-    //            new Dictionary<String, object>
-    //            {
-    //                {"Car",car }
-    //            });
-    //    }
-    //    else if (result is "Modify")
-    //    {
-    //        open modification page
-    //    }
-    //}
-
-    private async void Carliste_ItemTapped_1(object sender, ItemTappedEventArgs e)
+    private async void Carliste_ItemTapped(object sender, ItemTappedEventArgs e)
     {
         
             var car = ((ListView)sender).SelectedItem as Car;
@@ -89,27 +28,41 @@ public partial class HomePage : ContentPage
                 var Delete = await DisplayAlert("warning", "Are you sure you want to delete this item", "Yes", "No");
                 if (Delete is true)
                 {
-                    //delete item
+                    var homePageViewModel = BindingContext as HomePageViewModel;
+                    //homePageViewModel?.RemoveCar.Execute(car);
+                    homePageViewModel?.Delete(car);
                 }
+                InitializeComponent();
             }
             else if (result is "Details")
             {
-
                 HomePageViewModel viewModel = new HomePageViewModel();
                 await viewModel.GoToDetails(car);
-                // open details page
-
-                //Car car;
-                //await Shell.Current.GoToAsync($"{nameof(DetailsPage)}", true,
-                //    new Dictionary<String, object>
-                //    {
-                //        {"Car",car }
-                //    });
             }
             else if (result is "Modify")
             {
-                //open modification page
-            }
+                await Shell.Current.GoToAsync($"//{nameof(AddPage)}");
+        }
         
+    }
+
+    private async void MenuItem_Delete(object sender, EventArgs e)
+    {
+        var car= ((MenuItem)sender).BindingContext as Car; 
+        var res= await DisplayAlert("warning", "Are you sure you want to delete this item", "Yes", "No");
+        if (res)
+        {   
+            var homePageViewModel =BindingContext as HomePageViewModel;
+            //homePageViewModel?.RemoveCar.Execute(car);
+            homePageViewModel?.Delete(car);  
+            
+        }
+        InitializeComponent();
+    }
+
+    private void MenuItem_Modify(object sender, EventArgs e)
+    {
+        var car = ((MenuItem)sender).BindingContext as Car;
+        Shell.Current.GoToAsync($"//{nameof(AddPage)}");
     }
 }

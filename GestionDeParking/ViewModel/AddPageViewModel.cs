@@ -12,11 +12,13 @@ namespace GestionDeParking.ViewModel
 {
     public partial class AddPageViewModel:BaseViewModel
     {
-        //[ICommand]
-        //void Add()
-        //{
-        //    Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-        //}
-       
+        [ICommand]
+        public void AddCar(Car car)
+        {
+            var vm = new HomePageViewModel();
+            vm.NewCars.Add(car);
+            Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+        }
+
     }
 }

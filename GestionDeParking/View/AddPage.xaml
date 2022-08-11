@@ -39,7 +39,7 @@
                         BorderColor="White" 
                         HeightRequest="45"  
                         HorizontalOptions="FillAndExpand">
-                    <Entry x:Name="model"  
+                    <Entry x:Name="name"  
                            VerticalOptions="Center" 
                            Placeholder="Car Model..." 
                            Keyboard="Default" 
@@ -49,27 +49,27 @@
             <StackLayout Orientation="Vertical" Padding="20,0">
                 <Label Text="Distance" FontSize="20" TextColor="Black" FontFamily="Bold" HorizontalTextAlignment="Start" Padding="-10,5"/>
                 <Frame  Padding="0" HasShadow="True" BorderColor="White" HeightRequest="45"  HorizontalOptions="FillAndExpand">
-                    <Entry  VerticalOptions="Center" Placeholder="Distance..." Keyboard="Default" ClearButtonVisibility="WhileEditing" />
+                    <Entry x:Name="distance"   VerticalOptions="Center" Placeholder="Distance..." Keyboard="Default" ClearButtonVisibility="WhileEditing" />
                 </Frame>
             </StackLayout>
             <StackLayout Orientation="Vertical" Padding="20,0">
                 <Label Text="Price" FontSize="20" TextColor="Black" FontFamily="Bold" HorizontalTextAlignment="Start" Padding="-10,5"/>
                 <Frame  Padding="0" HasShadow="True" BorderColor="White" HeightRequest="45"  HorizontalOptions="FillAndExpand">
-                    <Entry  VerticalOptions="Center" Placeholder="Rental Price Per Day..." Keyboard="Default" ClearButtonVisibility="WhileEditing"/>
+                    <Entry x:Name="price"   VerticalOptions="Center" Placeholder="Rental Price Per Day..." Keyboard="Default" ClearButtonVisibility="WhileEditing"/>
                 </Frame>
             </StackLayout>
             <StackLayout Orientation="Vertical" Padding="20,0">
                 <Label Text="Engine Details" FontSize="20" TextColor="Black" FontFamily="Bold" HorizontalTextAlignment="Start" Padding="-10,5"/>
                 <Frame  Padding="0" HasShadow="True" BorderColor="White" HeightRequest="45"  HorizontalOptions="FillAndExpand">
-                    <Entry  VerticalOptions="Center" Placeholder="Car Engine Details..." Keyboard="Default" ClearButtonVisibility="WhileEditing" />
+                    <Entry x:Name="engine"   VerticalOptions="Center" Placeholder="Car Engine Details..." Keyboard="Default" ClearButtonVisibility="WhileEditing" />
                 </Frame>
             </StackLayout>
 
 
-            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef"  />
+            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" Clicked="OnButtonClicked"  />
             <!--Clicked="OnButtonClicked"-->
 
-            <CollectionView x:Name="collectionView">
+            <!--<CollectionView x:Name="collectionView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
@@ -81,7 +81,7 @@
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView>-->
         </VerticalStackLayout>
         
     </ScrollView>

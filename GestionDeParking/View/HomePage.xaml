@@ -12,7 +12,7 @@
         <StackLayout>
             <ListView 
                       
-                      ItemTapped="Carliste_ItemTapped_1"
+                      ItemTapped="Carliste_ItemTapped"
                       x:Name="Carliste" 
                       ItemsSource="{Binding NewCars}"
                       HasUnevenRows="True"
@@ -21,8 +21,8 @@
                     <DataTemplate>
                         <ViewCell >
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Delete"/>
-                                <MenuItem Text="Modify"/>
+                                <MenuItem Text="Delete" Clicked="MenuItem_Delete"/>
+                                <MenuItem Text="Modify" Clicked="MenuItem_Modify"/>
                             </ViewCell.ContextActions>
                             <Frame>
                                 <Frame.GestureRecognizers>
