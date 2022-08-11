@@ -11,7 +11,8 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar Placeholder="Search items..." />
-            <ListView x:Name="Carliste" 
+            <ListView ItemTapped="Carliste_ItemTapped"
+                x:Name="Carliste" 
                       ItemsSource="{Binding Cars}"
                       HasUnevenRows="True">
 

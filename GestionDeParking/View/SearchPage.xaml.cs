@@ -10,4 +10,9 @@ public partial class SearchPage : ContentPage
 		this.BindingContext = searchPage;
 		
 	}
+
+	private void Carliste_ItemTapped(object sender, ItemTappedEventArgs e)
+	{
+
+	}
 }

@@ -10,19 +10,24 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="Carliste" 
+            <ListView 
+                      
+                      ItemTapped="Carliste_ItemTapped_1"
+                      x:Name="Carliste" 
                       ItemsSource="{Binding NewCars}"
                       HasUnevenRows="True"
-                      SelectionMode="None"
                       >
-
                 <ListView.ItemTemplate >
                     <DataTemplate>
                         <ViewCell >
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Delete"/>
+                                <MenuItem Text="Modify"/>
+                            </ViewCell.ContextActions>
                             <Frame>
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding .}"
-                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=GoToDetailsCommand}"/>
+                                    <!--<TapGestureRecognizer CommandParameter="{Binding .}"
+                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=GoToDetailsCommand}"/>-->
 
                                 </Frame.GestureRecognizers>
                                 <Grid Padding="10" 
@@ -71,8 +76,7 @@
                                             HorizontalOptions="End"
                                             Grid.RowSpan="2"
                                             HeightRequest="50"
-                                            WidthRequest="30"
-                                            Clicked="DisplayActionSheet"/>
+                                            WidthRequest="30"/>
                                     <!--<Label x:Name="label"  
                                            Text="{Binding clickTotal}"
                                            Grid.Column="2"

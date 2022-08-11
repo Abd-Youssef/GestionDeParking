@@ -42,7 +42,6 @@ namespace GestionDeParking.ViewModel
         {
             Shell.Current.GoToAsync($"//{nameof(PopupPage)}");
         }
-        HomePage res;
         /*
         BestCars = new ObservableCollection<Car>();
         BestCars.Add(new Car { Name = "BMW", Distance = 30000, Image = "bmw.jpg" });
