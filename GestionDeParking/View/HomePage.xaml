@@ -4,14 +4,12 @@
              x:Class="GestionDeParking.View.HomePage"
              xmlns:model="clr-namespace:GestionDeParking.Model"
              xmlns:viewmodel="clr-namespace:GestionDeParking.ViewModel"
-             
              Title="HomePage"
              >
 
     <ContentPage.Content>
         <StackLayout>
             <ListView 
-                      
                       ItemTapped="Carliste_ItemTapped"
                       x:Name="Carliste" 
                       ItemsSource="{Binding NewCars}"
@@ -70,17 +68,6 @@
                                                Text="{Binding Distance ,StringFormat ='{0} KM' }"/>
                                     </StackLayout>
                                     
-                                    <ImageButton Source="menu.png"
-                                                 Grid.Column="2"
-                                                 VerticalOptions="Start"
-                                            HorizontalOptions="End"
-                                            Grid.RowSpan="2"
-                                            HeightRequest="50"
-                                            WidthRequest="30"/>
-                                    <!--<Label x:Name="label"  
-                                           Text="{Binding clickTotal}"
-                                           Grid.Column="2"
-                                           Grid.Row="2"/>-->
                                 </Grid>
 
                             </Frame>

@@ -40,7 +40,6 @@ namespace GestionDeParking.ViewModel
         [ICommand]
         public async Task Delete(Car car)
         {
-
             NewCars.Remove(car);
         }
 
