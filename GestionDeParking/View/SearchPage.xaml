@@ -6,19 +6,26 @@
              xmlns:viewmodel="clr-namespace:GestionDeParking.ViewModel"
              Title="SearchPage">
 
-    <!--<ContentPage.BindingContext ContentTemplate="{DataTemplate local:SearchPageViewModel}"/>-->
+    <ContentPage.BindingContext ContentTemplate="{DataTemplate local:SearchPageViewModel}"/>
 
     <ContentPage.Content>
         <StackLayout>
             <SearchBar Placeholder="Search items..." />
-            <ListView ItemTapped="Carliste_ItemTapped"
+            <ListView SelectedItem="{Binding SelectedCar, Mode=TwoWay}"
                 x:Name="Carliste" 
                       ItemsSource="{Binding Cars}"
-                      HasUnevenRows="True">
-
+                      HasUnevenRows="True"
+                      IsGroupingEnabled="True"
+                      >
+                <ListView.Header>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.Header>
+                
                 <ListView.ItemTemplate >
                     <DataTemplate>
-                        <ViewCell >
+                        <ViewCell>
                             <Frame>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding .}"

@@ -11,8 +11,5 @@ public partial class SearchPage : ContentPage
 		
 	}
 
-	private void Carliste_ItemTapped(object sender, ItemTappedEventArgs e)
-	{
 
-	}
 }

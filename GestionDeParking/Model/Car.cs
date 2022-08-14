@@ -11,6 +11,7 @@ namespace GestionDeParking.Model
     {
         [PrimaryKey , AutoIncrement]
         public int Id { get; set; }
+        public bool Dispo { get; set; }  
         public string Marque { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }

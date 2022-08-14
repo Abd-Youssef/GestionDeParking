@@ -6,10 +6,11 @@ namespace GestionDeParking.View;
 
 public partial class AddPage : ContentPage
 {
-	public AddPage()
+	public AddPage(AddPageViewModel addPageViewModel)
 	{
-		InitializeComponent();
-	}
+        InitializeComponent();
+        BindingContext = addPageViewModel;
+    }
     //   protected override async void OnAppearing()
     //   {
     //       base.OnAppearing();
@@ -30,18 +31,21 @@ public partial class AddPage : ContentPage
     //		collectionView.ItemsSource = await App.Database.GetPeopleAsync();
     //	}
     //}
-    public async void OnButtonClicked(object sender, EventArgs e)
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        
-            var car =new Car
-            {
-                Marque = marque.Text,
-                Name   = name.Text,
-                Engine = engine.Text,
-                Image = "bmw.jpg"
-            };
-        //var vm = BindingContext as AddPageViewModel;
-        var vm = new AddPageViewModel();
-        vm.AddCar(car); 
+        base.OnNavigatedTo(args);
     }
+    //public async void OnButtonClicked(object sender, EventArgs e)
+    //{
+        
+    //        var car =new Car
+    //        {
+    //            Marque = marque.Text,
+    //            Name   = name.Text,
+    //            Engine = engine.Text,
+    //            Image = "bmw.jpg"
+    //        };
+    //    var vm = BindingContext as HomePageViewModel;
+    //    vm.AddCar(car); 
+    //}
 }

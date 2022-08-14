@@ -10,12 +10,6 @@ public partial class LoginPage : ContentPage
 	{
 		InitializeComponent();
 		this.BindingContext = viewModel;
-
-        
     }
-	//public async void DisplayAlert(object obj, EventArgs eventArgs)
-	//{
-	//	await DisplayAlert("warning", "This alert Demo", "Ok");
-	//}
 }
 

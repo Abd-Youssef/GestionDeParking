@@ -1,5 +1,6 @@
-﻿
+﻿using GestionDeParking.Model;
 using GestionDeParking.View;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,10 @@ using System.Threading.Tasks;
 
 namespace GestionDeParking.ViewModel
 {
-    public partial class LoginPageViewModel :BaseViewModel
+    [QueryProperty(nameof(Car), "Car")]
+    public partial class ModificationPageViewModel :BaseViewModel
     {
-
-        [ICommand]
-        void Login()
-        {
-            Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-        }
+        [ObservableProperty]
+        Car car;
     }
-    
 }

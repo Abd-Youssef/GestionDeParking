@@ -12,11 +12,6 @@ namespace GestionDeParking.ViewModel
         [ObservableProperty]
         Car car;
 
-        [ICommand]
-        void OpenPopup()
-        {
-            Shell.Current.GoToAsync($"//{nameof(PopupPage)}");
-        }
     }
 
 }

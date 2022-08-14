@@ -8,24 +8,59 @@
              >
 
     <ContentPage.Content>
-        <StackLayout>
+        
+        <StackLayout Spacing="10">
+           
+            <!--SelectedItem="{Binding SelectedCar ,Mode=TwoWay}"-->
+            <!--ItemTapped="Carliste_ItemTapped"-->
+            <Grid   ColumnDefinitions=" auto,*" 
+                    RowDefinitions="*,*"
+                   >
+                <SearchBar 
+                            HorizontalOptions="Start"
+                            Placeholder="Search items..." 
+                            Grid.Column="0"
+                            Grid.Row="0"
+                           />
+                <Label  FontSize="20" TextColor="Black" 
+                        FontFamily="Bold" 
+                        VerticalTextAlignment="Center"
+                        HorizontalOptions="EndAndExpand"
+                        Text="ALL Cars"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1">
+                    <Label.Triggers>
+                        <DataTrigger    TargetType="Label"
+                                        Binding="{Binding Source={x:Reference DispoSwitch}, Path=IsToggled}"
+                                        Value="true">
+                            <Setter Property="Text" Value="Available Cars" />
+                            <Setter Property="TextColor" Value="Green" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Switch x:Name="DispoSwitch" 
+                            HorizontalOptions="End"
+                                VerticalOptions="End"
+                                Grid.Row="0"
+                                Grid.Column="1"/>
+
+
+            </Grid>
             <ListView 
-                      ItemTapped="Carliste_ItemTapped"
+                      
+                SelectedItem="{Binding SelectedCar ,Mode=TwoWay}"
                       x:Name="Carliste" 
                       ItemsSource="{Binding NewCars}"
                       HasUnevenRows="True"
+                      
                       >
                 <ListView.ItemTemplate >
                     <DataTemplate>
-                        <ViewCell >
-                            <ViewCell.ContextActions>
-                                <MenuItem Text="Delete" Clicked="MenuItem_Delete"/>
-                                <MenuItem Text="Modify" Clicked="MenuItem_Modify"/>
-                            </ViewCell.ContextActions>
+                        <ViewCell  >
                             <Frame>
                                 <Frame.GestureRecognizers>
-                                    <!--<TapGestureRecognizer CommandParameter="{Binding .}"
-                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=GoToDetailsCommand}"/>-->
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=GoToDetailsCommand}"/>
 
                                 </Frame.GestureRecognizers>
                                 <Grid Padding="10" 
@@ -39,11 +74,7 @@
                                                WidthRequest="150" />
                                     <StackLayout Grid.Column="1"
                                            Grid.RowSpan="3"
-                                                 Spacing="20"
-                                                 
-                                        >
-
-
+                                                 Spacing="20">
                                         <Label Grid.Column="1"
                                                Grid.Row="0"
                                                Text="{Binding Marque}"
@@ -67,7 +98,21 @@
                                                FontSize="16"
                                                Text="{Binding Distance ,StringFormat ='{0} KM' }"/>
                                     </StackLayout>
-                                    
+
+                                    <ImageButton Source="menu.png"
+                                                 Grid.Column="2"
+                                                 VerticalOptions="Start"
+                                            HorizontalOptions="End"
+                                            Grid.RowSpan="2"
+                                            HeightRequest="50"
+                                            WidthRequest="30">
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=OpenPopupCommand}"/>
+
+                                        </ImageButton.GestureRecognizers>
+
+                                    </ImageButton>
                                 </Grid>
 
                             </Frame>

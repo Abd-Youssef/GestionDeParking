@@ -12,7 +12,7 @@
         Route="LoginPage" />
     <TabBar x:Name="PhoneTabs">
         <Tab Title="Home" Icon="maison.png">
-             <ShellContent ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage"/>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage"/>
         </Tab>
         <Tab Title="Search" Icon="search.png">
             <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" Route="SearchPage"/>
@@ -20,14 +20,10 @@
         <Tab Title="ADD" Icon="plus.png">
             <ShellContent ContentTemplate="{DataTemplate local:AddPage}" Route="AddPage"/>
         </Tab>
-     </TabBar>
-    <ShellContent
-        Title="Popup Page"
-        ContentTemplate="{DataTemplate local:PopupPage}"
-        Route="PopupPage" />
-       
-    
-    
-    
+    </TabBar>
+
+
+
+
 
 </Shell>

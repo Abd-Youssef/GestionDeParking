@@ -64,6 +64,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="DevExpress.Data" Version="22.1.4" />
+	  <PackageReference Include="FSharp.Core" Version="6.0.5" />
 	  <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.0-preview.6.22329.4" />
 	  <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
 	  <PackageReference Include="SQLite" Version="3.13.0" />
@@ -83,10 +84,7 @@
 	  <MauiXaml Update="View\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\PopupPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\ProfilPage.xaml">
+	  <MauiXaml Update="View\ModificationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\SearchPage.xaml">

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GestionDeParking.View.AddPage"
-             xmlns:viewmodel="clr-namespace:GestionDeParking.ViewModel"
-             Title="Add New Car">
-
-    <ScrollView>
+             x:Class="GestionDeParking.View.ModificationPage"
+             Title="ModificationPage">
+    <ScrollView >
         <VerticalStackLayout
             Spacing="25"
             VerticalOptions="Start">
@@ -21,8 +19,9 @@
                         BorderColor="White" 
                         HeightRequest="45"  
                         HorizontalOptions="FillAndExpand">
-                    <Entry
-                           Text="{Binding Car.Name ,Mode=OneWayToSource}"
+                    <Entry x:Name="marque" 
+                           
+                           Text="{Binding Car.Name ,Mode=TwoWay}"
                            VerticalOptions="Center" 
                            Placeholder="Car Marque..." 
                            Keyboard="Default" 
@@ -41,7 +40,8 @@
                         BorderColor="White" 
                         HeightRequest="45"  
                         HorizontalOptions="FillAndExpand">
-                    <Entry Text="{Binding Car.Model ,Mode=OneWayToSource}"
+                    <Entry x:Name="name"  
+                           Text="{Binding Car.Marque,Mode=TwoWay}"
                            VerticalOptions="Center" 
                            Placeholder="Car Model..." 
                            Keyboard="Default" 
@@ -60,9 +60,10 @@
                         BorderColor="White" 
                         HeightRequest="45"  
                         HorizontalOptions="FillAndExpand">
-                    <Entry Text="{Binding Car.Distance ,Mode=OneWayToSource}"
+                    <Entry x:Name="distance" 
                            VerticalOptions="Center" 
                            Placeholder="Distance..." 
+                           Text="{Binding Car.Distance}"
                            Keyboard="Default" 
                            ClearButtonVisibility="WhileEditing"/>
                 </Frame>
@@ -82,16 +83,16 @@
                         Text="Available"
                         TextColor="Green"
                         Grid.Column="0">
-                        <Label.Triggers>
-                            <DataTrigger    TargetType="Label"
+                    <Label.Triggers>
+                        <DataTrigger    TargetType="Label"
                                         Binding="{Binding Source={x:Reference DispoSwitch}, Path=IsToggled}"
                                         Value="false">
-                                <Setter Property="Text" Value="Not Available" />
-                                <Setter Property="TextColor" Value="Red" />
-                            </DataTrigger>
-                        </Label.Triggers>
-                    </Label>
-                    <Switch x:Name="DispoSwitch" 
+                            <Setter Property="Text" Value="Not Available" />
+                            <Setter Property="TextColor" Value="Red" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Switch x:Name="DispoSwitch" 
                                 VerticalOptions="End"
                                 Grid.Column="1"
                         IsToggled="{Binding Car.Dispo}"
@@ -102,35 +103,13 @@
             <StackLayout Orientation="Vertical" Padding="20,0">
                 <Label Text="Engine Details" FontSize="20" TextColor="Black" FontFamily="Bold" HorizontalTextAlignment="Start" Padding="-10,5"/>
                 <Frame  Padding="0" HasShadow="True" BorderColor="White" HeightRequest="45"  HorizontalOptions="FillAndExpand">
-                    <Entry  VerticalOptions="Center" Text="{Binding Car.Engine ,Mode=OneWayToSource}" Keyboard="Default" ClearButtonVisibility="WhileEditing" />
+                    <Entry x:Name="engine"   VerticalOptions="Center" Text="{Binding Car.Engine}" Keyboard="Default" ClearButtonVisibility="WhileEditing" />
                 </Frame>
             </StackLayout>
 
 
-            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef"  >
-                <Button.GestureRecognizers>
-                    <TapGestureRecognizer CommandParameter="{Binding .}"
-                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=AddCarCommand}"/>
-
-                </Button.GestureRecognizers>
-            </Button>
-            <!--Clicked="OnButtonClicked"-->
-
-            <!--<CollectionView x:Name="collectionView">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Label Text="{Binding Marque}"
-                               FontSize="Medium" />
-                            <Label Text="{Binding Name}"
-                               TextColor="Silver"
-                               FontSize="Small" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>-->
+            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" />
         </VerticalStackLayout>
-        
-    </ScrollView>
 
+    </ScrollView>
 </ContentPage>
