@@ -14,9 +14,9 @@
         <Tab Title="Home" Icon="maison.png">
             <ShellContent ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage"/>
         </Tab>
-        <Tab Title="Search" Icon="search.png">
+        <!--<Tab Title="Search" Icon="search.png">
             <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" Route="SearchPage"/>
-        </Tab>
+        </Tab>-->
         <Tab Title="ADD" Icon="plus.png">
             <ShellContent ContentTemplate="{DataTemplate local:AddPage}" Route="AddPage"/>
         </Tab>

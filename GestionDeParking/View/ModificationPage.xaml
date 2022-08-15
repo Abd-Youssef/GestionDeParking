@@ -64,7 +64,7 @@
                            VerticalOptions="Center" 
                            Placeholder="Distance..." 
                            Text="{Binding Car.Distance}"
-                           Keyboard="Default" 
+                           Keyboard="Numeric" 
                            ClearButtonVisibility="WhileEditing"/>
                 </Frame>
             </StackLayout>
@@ -106,9 +106,6 @@
                     <Entry x:Name="engine"   VerticalOptions="Center" Text="{Binding Car.Engine}" Keyboard="Default" ClearButtonVisibility="WhileEditing" />
                 </Frame>
             </StackLayout>
-
-
-            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" />
         </VerticalStackLayout>
 
     </ScrollView>

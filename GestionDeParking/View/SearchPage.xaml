@@ -6,24 +6,42 @@
              xmlns:viewmodel="clr-namespace:GestionDeParking.ViewModel"
              Title="SearchPage">
 
-    <ContentPage.BindingContext ContentTemplate="{DataTemplate local:SearchPageViewModel}"/>
 
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar Placeholder="Search items..." />
-            <ListView SelectedItem="{Binding SelectedCar, Mode=TwoWay}"
+            <Grid   ColumnDefinitions=" auto,*" 
+                   >
+                <Label  FontSize="20" TextColor="Black" 
+                        FontFamily="Bold" 
+                        VerticalTextAlignment="Center"
+                        HorizontalOptions="EndAndExpand"
+                        Text="ALL Cars"
+                        Grid.Column="0">
+                    <Label.Triggers>
+                        <DataTrigger    TargetType="Label"
+                                        Binding="{Binding Source={x:Reference DispoSwitch}, Path=IsToggled}"
+                                        Value="true">
+                            <Setter Property="Text" Value="Available Cars" />
+                            <Setter Property="TextColor" Value="Green" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Switch x:Name="DispoSwitch" 
+                        IsToggled="False"
+                            HorizontalOptions="End"
+                                VerticalOptions="End"
+                                Grid.Column="1"/>
+
+            </Grid>
+            
+            <ListView 
                 x:Name="Carliste" 
-                      ItemsSource="{Binding Cars}"
+                
                       HasUnevenRows="True"
-                      IsGroupingEnabled="True"
                       >
-                <ListView.Header>
-                    <DataTemplate>
-                        <Label Text="{Binding Name}"/>
-                    </DataTemplate>
-                </ListView.Header>
                 
                 <ListView.ItemTemplate >
+               
                     <DataTemplate>
                         <ViewCell>
                             <Frame>
@@ -72,7 +90,28 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
+                <ListView.Triggers>
+                    
+                    <DataTrigger    TargetType="ListView"
+                                        Binding="{Binding Source={x:Reference ListeSwitch}, Path=IsToggled}"
+                                        Value="true">
+                        <Setter Property="ItemsSource" Value="{Binding NewCars}" />
+                    </DataTrigger>
+                    <DataTrigger    TargetType="ListView"
+                                        Binding="{Binding Source={x:Reference ListeSwitch}, Path=IsToggled}"
+                                        Value="false"
+                                    >
+                        <Setter Property="ItemsSource" Value="{Binding LastCars}" />
+                    </DataTrigger>
+                </ListView.Triggers>
+                
             </ListView>
+            
+            <Switch x:Name="ListeSwitch" 
+                        IsToggled="False"
+                            HorizontalOptions="End"
+                                VerticalOptions="End"
+                                Grid.Column="1"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

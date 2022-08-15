@@ -17,7 +17,7 @@ namespace GestionDeParking.ViewModel
 {
     public partial class HomePageViewModel : BaseViewModel
     {
-
+        
         public HomePageViewModel()
         {
             NewCars = new ObservableCollection<Car>();
@@ -56,6 +56,7 @@ namespace GestionDeParking.ViewModel
         public void AddCar(Car car)
         {            
             NewCars.Add(car);
+            OnPropertyChanged(nameof(NewCars));
             Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
 
@@ -80,6 +81,7 @@ namespace GestionDeParking.ViewModel
 
                 case "Modify":
                     await GoToModification(car);
+                    OnPropertyChanged(nameof(NewCars));
                     break;
                 default:
                     break;
@@ -99,18 +101,16 @@ namespace GestionDeParking.ViewModel
                 });
             
         }
-
-
-
-        /*
-        BestCars = new ObservableCollection<Car>();
-        BestCars.Add(new Car { Name = "BMW", Distance = 30000, Image = "bmw.jpg" });
-
-        RecommendedCars = new ObservableCollection<Car>();
-        RecommendedCars.Add(new Car { Name = "Mercades", Distance = 30000, Image = "ibiza.jpg" });
-        */
-
-
+        //[ICommand]
+        //public async void AllCars()
+        //{
+        //    Carliste.ItemsSource = NewCars;
+        //}
+        //[ICommand]
+        //public async void AllCars()
+        //{
+        //    Carliste.ItemsSource = NewCars.Where(x => x.Dispo);
+        //}
 
     }
 }
