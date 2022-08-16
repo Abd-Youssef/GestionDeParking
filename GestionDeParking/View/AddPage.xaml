@@ -107,12 +107,12 @@
             </StackLayout>
 
 
-            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef"  >
-                <Button.GestureRecognizers>
+            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" Command="{Binding AddCarCommand}" >
+                <!--<Button.GestureRecognizers>
                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=AddCarCommand}"/>
 
-                </Button.GestureRecognizers>
+                </Button.GestureRecognizers>-->
             </Button>
             <!--Clicked="OnButtonClicked"-->
 

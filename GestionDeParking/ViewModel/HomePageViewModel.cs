@@ -2,9 +2,11 @@
 using DevExpress.Data.XtraReports.Native;
 using GestionDeParking.Model;
 using GestionDeParking.View;
+using GestionDeParking.Services;
 using Microsoft.FSharp.Linq.RuntimeHelpers;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,16 +19,19 @@ namespace GestionDeParking.ViewModel
 {
     public partial class HomePageViewModel : BaseViewModel
     {
-        
+        public AsyncCommand RefreshCommand { get; }
+        //public AsyncCommand ClearCommand { get; }
         public HomePageViewModel()
         {
             NewCars = new ObservableCollection<Car>();
-            NewCars.Add(new Car { Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
-            NewCars.Add(new Car { Marque = "SEAT"      , Name = "IBIZA"  , Dispo = false, Distance = 30000, Image = "ibiza.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
-            NewCars.Add(new Car { Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
-            NewCars.Add(new Car { Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
-            NewCars.Add(new Car { Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
 
+            AddCar(new Car { Id = 1, Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
+            //NewCars.Add(new Car { Id = 2, Marque = "SEAT"      , Name = "IBIZA"  , Dispo = false, Distance = 30000, Image = "ibiza.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
+            //NewCars.Add(new Car { Id = 3, Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
+            //NewCars.Add(new Car { Id = 4, Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
+            //NewCars.Add(new Car { Id = 5, Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
+
+            Refresh();
         }
 
 
@@ -49,15 +54,19 @@ namespace GestionDeParking.ViewModel
         [ICommand]
         public async Task DeleteCar(Car car)
         {
-            NewCars.Remove(car);
-            OnPropertyChanged(nameof(NewCars));
+            //NewCars.Remove(car);
+            //OnPropertyChanged(nameof(NewCars));
+            await CarService.RemoveCar(car.Id);
+            await Refresh(); 
         }
         [ICommand]
-        public void AddCar(Car car)
-        {            
-            NewCars.Add(car);
-            OnPropertyChanged(nameof(NewCars));
-            Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+        public async void AddCar(Car car)
+        {
+            //NewCars.Add(car);
+            //OnPropertyChanged(nameof(NewCars));
+            //Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            await CarService.AddNewCar(car.Name, car.Marque);
+            await Refresh();
         }
 
         [ICommand]
@@ -81,7 +90,7 @@ namespace GestionDeParking.ViewModel
 
                 case "Modify":
                     await GoToModification(car);
-                    OnPropertyChanged(nameof(NewCars));
+                    await Refresh();
                     break;
                 default:
                     break;
@@ -101,6 +110,29 @@ namespace GestionDeParking.ViewModel
                 });
             
         }
+        async Task Refresh()
+        {
+            IsBusy = true;
+            await Task.Delay(2000);
+            NewCars.Clear();
+            var cars = await CarService.GetCar();
+            if (cars != null)
+            {
+                foreach (var car in cars)
+                {
+                    NewCars.Add(car);
+                }
+            }
+            IsBusy = false;
+
+        }
+
+        //Void Clear()
+        //{
+        //    Car.Clear();
+        //}
+
+
         //[ICommand]
         //public async void AllCars()
         //{

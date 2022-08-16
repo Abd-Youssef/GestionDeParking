@@ -6,7 +6,7 @@ namespace GestionDeParking.View;
 
 public partial class AddPage : ContentPage
 {
-	public AddPage(AddPageViewModel addPageViewModel)
+	public AddPage(HomePageViewModel addPageViewModel)
 	{
         InitializeComponent();
         BindingContext = addPageViewModel;

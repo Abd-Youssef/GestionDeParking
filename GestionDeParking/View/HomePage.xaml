@@ -6,6 +6,9 @@
              xmlns:viewmodel="clr-namespace:GestionDeParking.ViewModel"
              Title="HomePage"
              >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ADD"/>
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         
@@ -23,7 +26,7 @@
                             Grid.ColumnSpan="2"
                             Grid.Row="1"
                            />
-                
+
                 <Button Grid.Column="0" Grid.Row="0" 
                         x:Name="btn1"
                             Text="All Cars" 
@@ -34,10 +37,7 @@
                             BackgroundColor="#0d172a" 
                             BorderWidth="0.5"
                             Clicked="All_Clicked"/>
-
-                
-                
-                    <Button Grid.Column="1" Grid.Row="0"
+                <Button Grid.Column="1" Grid.Row="0"
                         x:Name="btn2"
                         Text="Available Cars" 
                             WidthRequest="150"
@@ -48,7 +48,6 @@
                             BackgroundColor="White" 
                             BorderWidth="0.5"
                             Clicked="Car_Clicked"/>
-                
             </Grid>
             
 
@@ -58,6 +57,9 @@
                       x:Name="Carliste" 
                       HasUnevenRows="True"
                       ItemsSource="{Binding NewCars}"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsBusy,Mode=OneWay}"
+                RefreshCommand="{Binding RefreshCommand }"
                       >
                 <ListView.ItemTemplate >
                     <DataTemplate>
