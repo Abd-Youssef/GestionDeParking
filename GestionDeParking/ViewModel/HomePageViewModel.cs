@@ -19,26 +19,18 @@ namespace GestionDeParking.ViewModel
 {
     public partial class HomePageViewModel : BaseViewModel
     {
-        public AsyncCommand RefreshCommand { get; }
-        //public AsyncCommand ClearCommand { get; }
         public HomePageViewModel()
         {
-            NewCars = new ObservableCollection<Car>();
+            //NewCars = new ObservableCollection<Car>();
 
-            AddCar(new Car { Id = 1, Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
-            //NewCars.Add(new Car { Id = 2, Marque = "SEAT"      , Name = "IBIZA"  , Dispo = false, Distance = 30000, Image = "ibiza.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
-            //NewCars.Add(new Car { Id = 3, Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
-            //NewCars.Add(new Car { Id = 4, Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
-            //NewCars.Add(new Car { Id = 5, Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
-
+            //AddCar(new Car { Id = 1, Marque = "VOLKSWAGEN", Name = " GOLF 8", Dispo = true, Distance = 100000, Image = "golf8.jpg", Engine = "NOMBRE DE CYLINDRES\t4\r\nENERGIE\tEssence\r\nPUISSANCE FISCALE\t8 CV\r\nPUISSANCE (CH.DIN)\t150 CH\r\nCOUPLE\t250 nm 1400 tr/min\r\nCYLINDRÉE\t1395 CM³" });
+            
             Refresh();
         }
 
 
-        [ObservableProperty]
-        public ObservableCollection<Car> newCars;
-        Car selectedCar;
-        public Car SelectedCar { get { return selectedCar; } set { selectedCar = value; } }
+        //[ObservableProperty]
+        //public ObservableCollection<Car> newCars;
         
         [ICommand]
         public async Task GoToDetails(Car car)
@@ -54,20 +46,15 @@ namespace GestionDeParking.ViewModel
         [ICommand]
         public async Task DeleteCar(Car car)
         {
-            //NewCars.Remove(car);
-            //OnPropertyChanged(nameof(NewCars));
             await CarService.RemoveCar(car.Id);
             await Refresh(); 
         }
-        [ICommand]
-        public async void AddCar(Car car)
-        {
-            //NewCars.Add(car);
-            //OnPropertyChanged(nameof(NewCars));
-            //Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-            await CarService.AddNewCar(car.Name, car.Marque);
-            await Refresh();
-        }
+        //[ICommand]
+        //public async void AddCar(Car car)
+        //{
+        //    await CarService.AddNewCar(car);
+        //    await Refresh();
+        //}
 
         [ICommand]
         public async void OpenPopup(Car car)
@@ -81,6 +68,7 @@ namespace GestionDeParking.ViewModel
                     if (Delete)
                     {
                         await DeleteCar(car);
+                        await Refresh();
                     }
                     break;
 
@@ -90,7 +78,6 @@ namespace GestionDeParking.ViewModel
 
                 case "Modify":
                     await GoToModification(car);
-                    await Refresh();
                     break;
                 default:
                     break;
@@ -108,29 +95,28 @@ namespace GestionDeParking.ViewModel
                 {
                     {"Car",car }
                 });
-            
+
         }
+        [ICommand]
         async Task Refresh()
         {
-            IsBusy = true;
-            await Task.Delay(2000);
-            NewCars.Clear();
-            var cars = await CarService.GetCar();
-            if (cars != null)
-            {
-                foreach (var car in cars)
-                {
-                    NewCars.Add(car);
-                }
-            }
-            IsBusy = false;
+            await RefreshList();
 
         }
 
-        //Void Clear()
-        //{
-        //    Car.Clear();
-        //}
+
+        [ICommand]
+        public async Task GoToAdd()
+        {
+            var car = new Car();    
+            await Shell.Current.GoToAsync($"{nameof(AddPage)}", 
+                new Dictionary<String, object>
+                {
+                    {"Car",car }
+                });
+
+
+        }
 
 
         //[ICommand]

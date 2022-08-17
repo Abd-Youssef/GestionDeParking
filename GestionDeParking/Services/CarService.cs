@@ -24,18 +24,29 @@ namespace GestionDeParking.Services
             await db.CreateTableAsync<Car>();
         }
 
-        public static async Task AddNewCar(string name, string marque)
+        public static async Task AddNewCar(Car newCar)
         {
+            
             await Init();
-            var image = "bmw.png";
-            var car = new Car
+            Car car = new Car
             {
-                Name = name,
-                Marque = marque,
-                Image = image
+                Name = newCar.Name,
+                Marque = newCar.Marque,
+                Dispo = newCar.Dispo,
+                Engine = newCar.Engine,
+                Distance = newCar.Distance,
             };
-
+            if (newCar.Image is null)
+            {
+                car.Image = "unknown.png";
+                
+            }
+            else
+            {
+               car.Image=newCar.Image;
+            }
             var id = await db.InsertAsync(car);
+
         }
 
         public static async Task RemoveCar(int id)
@@ -44,6 +55,13 @@ namespace GestionDeParking.Services
             await Init();
 
             await db.DeleteAsync<Car>(id);
+        }
+        public static async Task ModifyCar(Car car)
+        {
+            await Init();
+            await AddNewCar(car);
+            await RemoveCar(car.Id);
+
         }
 
         public static async Task<IEnumerable<Car>> GetCar()
@@ -54,42 +72,7 @@ namespace GestionDeParking.Services
             return car;
         }
 
-        //public static async Task<Car> GetCar(int id)
-        //{
-        //    await Init();
-
-        //    var car = await db.Table<Car>()
-        //        .FirstOrDefaultAsync(c => c.Id == id);
-
-        //    return car;
-        //}
-
-
-
-
-        //    private readonly SQLiteAsyncConnection _database;
-
-        //    public CarService(string dbPath)
-        //    {
-        //        if (_database != null)
-        //                    return;
-        //        _database = new SQLiteAsyncConnection(dbPath);
-        //        _database.CreateTableAsync<Car>();
-
-
-        //    }
-
-        //    public Task<List<Car>> GetPeopleAsync()
-        //    {
-        //        var car = _database.Table<Car>().ToListAsync();
-        //        return car;
-        //    }
-
-        //    public Task<int> SavePersonAsync(Car car)
-        //    {
-        //        return _database.InsertAsync(car);
-        //    }
-        //}
+        
     }
 }
 

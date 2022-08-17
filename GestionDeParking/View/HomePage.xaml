@@ -7,15 +7,12 @@
              Title="HomePage"
              >
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="ADD"/>
+        <ToolbarItem Text="ADD" Command="{Binding GoToAddCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        
+
         <StackLayout Spacing="10">
-           
-            <!--SelectedItem="{Binding SelectedCar ,Mode=TwoWay}"-->
-            <!--ItemTapped="Carliste_ItemTapped"-->
             <Grid   
                 ColumnDefinitions=" *,*" 
                 Margin="0,10"
@@ -49,10 +46,7 @@
                             BorderWidth="0.5"
                             Clicked="Car_Clicked"/>
             </Grid>
-            
-
-            <ListView 
-                      
+            <ListView  
                 SelectedItem="{Binding SelectedCar ,Mode=TwoWay}"
                       x:Name="Carliste" 
                       HasUnevenRows="True"
@@ -60,6 +54,7 @@
                 IsPullToRefreshEnabled="True"
                 IsRefreshing="{Binding IsBusy,Mode=OneWay}"
                 RefreshCommand="{Binding RefreshCommand }"
+                
                       >
                 <ListView.ItemTemplate >
                     <DataTemplate>
@@ -127,22 +122,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
-                <!--<ListView.Triggers>
-
-                    <DataTrigger    TargetType="ListView"
-                                        Binding="{Binding Source={x:Reference ListeSwitch}, Path=IsToggled}"
-                                        Value="true">
-                        <Setter Property="ItemsSource" Value="{Binding NewCars }" />
-                    </DataTrigger>
-                </ListView.Triggers>
-
-            </ListView>
-
-            <Switch x:Name="ListeSwitch" 
-                        IsToggled="False"
-                            HorizontalOptions="End"
-                                VerticalOptions="End"
-                                Grid.Column="1"/>-->
+               
             </ListView>
         </StackLayout>
             

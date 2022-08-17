@@ -7,33 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GestionDeParking.Model;
-
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using GestionDeParking.Services;
 
 namespace GestionDeParking.ViewModel
 {
     [QueryProperty(nameof(Car), "Car")]
-        public partial class AddPageViewModel:BaseViewModel
+    public partial class AddPageViewModel : BaseViewModel
     {
-
         [ObservableProperty]
-            Car car;
-        //[ICommand]
-        //public void AddCar(Car car)
-        //{
-        //    var vm =  HomePageViewModel();
-        //    vm.NewCars.Add(car);
-        //    Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-        //}
+        Car car;
+
         [ICommand]
-        public async void AddCar(Car car)
+        public async void AddCar()
         {
-            //NewCars.Add(car);
-            //OnPropertyChanged(nameof(NewCars));
-            //Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-            await CarService.AddNewCar(car.Name, car.Marque);
-            //await Refresh();
+            await CarService.AddNewCar(car);
+            await Shell.Current.GoToAsync("..");
+            //await RefreshList();
         }
     }
 }

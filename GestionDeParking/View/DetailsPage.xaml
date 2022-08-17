@@ -39,6 +39,8 @@
                 <Label  Text="{Binding Car.Distance ,StringFormat ='{0} KM' }" />
                 <Label  Text=" MOTORISATION :" />
                 <Label  Text="{Binding Car.Engine}" />
+                <Label  Text=" Id :" />
+                <Label  Text="{Binding Car.Id}" />
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GestionDeParking.View.AddPage"
              xmlns:viewmodel="clr-namespace:GestionDeParking.ViewModel"
+             x:DataType="viewmodel:AddPageViewModel"
              Title="Add New Car">
 
-    <ScrollView>
         <VerticalStackLayout
             Spacing="25"
             VerticalOptions="Start">
@@ -22,7 +22,7 @@
                         HeightRequest="45"  
                         HorizontalOptions="FillAndExpand">
                     <Entry
-                           Text="{Binding Car.Name ,Mode=OneWayToSource}"
+                           Text="{Binding Car.Name }"
                            VerticalOptions="Center" 
                            Placeholder="Car Marque..." 
                            Keyboard="Default" 
@@ -41,7 +41,7 @@
                         BorderColor="White" 
                         HeightRequest="45"  
                         HorizontalOptions="FillAndExpand">
-                    <Entry Text="{Binding Car.Model ,Mode=OneWayToSource}"
+                    <Entry Text="{Binding Car.Marque }"
                            VerticalOptions="Center" 
                            Placeholder="Car Model..." 
                            Keyboard="Default" 
@@ -60,7 +60,7 @@
                         BorderColor="White" 
                         HeightRequest="45"  
                         HorizontalOptions="FillAndExpand">
-                    <Entry Text="{Binding Car.Distance ,Mode=OneWayToSource}"
+                    <Entry Text="{Binding Car.Distance }"
                            VerticalOptions="Center" 
                            Placeholder="Distance..." 
                            Keyboard="Default" 
@@ -102,35 +102,19 @@
             <StackLayout Orientation="Vertical" Padding="20,0">
                 <Label Text="Engine Details" FontSize="20" TextColor="Black" FontFamily="Bold" HorizontalTextAlignment="Start" Padding="-10,5"/>
                 <Frame  Padding="0" HasShadow="True" BorderColor="White" HeightRequest="45"  HorizontalOptions="FillAndExpand">
-                    <Entry  VerticalOptions="Center" Text="{Binding Car.Engine ,Mode=OneWayToSource}" Keyboard="Default" ClearButtonVisibility="WhileEditing" />
+                    <Entry  VerticalOptions="Center" Text="{Binding Car.Engine }" Keyboard="Default" ClearButtonVisibility="WhileEditing" />
                 </Frame>
             </StackLayout>
 
 
-            <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" Command="{Binding AddCarCommand}" >
-                <!--<Button.GestureRecognizers>
+        <Button Text="Save" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="#0792ef" Command="{Binding AddCarCommand}" >
+            <!--<Button.GestureRecognizers>
                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=AddCarCommand}"/>
 
                 </Button.GestureRecognizers>-->
-            </Button>
-            <!--Clicked="OnButtonClicked"-->
-
-            <!--<CollectionView x:Name="collectionView">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Label Text="{Binding Marque}"
-                               FontSize="Medium" />
-                            <Label Text="{Binding Name}"
-                               TextColor="Silver"
-                               FontSize="Small" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>-->
-        </VerticalStackLayout>
+        </Button>
+    </VerticalStackLayout>
         
-    </ScrollView>
 
 </ContentPage>

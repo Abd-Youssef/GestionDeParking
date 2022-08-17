@@ -60,6 +60,7 @@
 	  <None Remove="Resources\Images\plus.png" />
 	  <None Remove="Resources\Images\profil.png" />
 	  <None Remove="Resources\Images\search.png" />
+	  <None Remove="Resources\Images\unknown.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -87,9 +88,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\ModificationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\SearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
