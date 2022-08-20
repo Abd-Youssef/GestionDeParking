@@ -15,17 +15,6 @@ public partial class AddPage : ContentPage
     {
         base.OnNavigatedTo(args);
     }
-    //public async void OnButtonClicked(object sender, EventArgs e)
-    //{
 
-    //    var car = new Car
-    //    {
-    //        Marque = marque.Text,
-    //        Name = name.Text,
-    //        Engine = engine.Text,
-    //        Image = "bmw.jpg"
-    //    };
-    //    var vm = BindingContext as HomePageViewModel;
-    //    vm.AddCar(car);
-    //}
+    
 }

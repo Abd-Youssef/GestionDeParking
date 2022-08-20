@@ -26,7 +26,7 @@
                     IsClippedToBounds="True"
                     CornerRadius="80">
                     <Image
-                        Aspect="AspectFill"
+                        Aspect="AspectFit"
                         HeightRequest="160"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
@@ -35,12 +35,55 @@
                 </Frame>
             </Grid>
             <VerticalStackLayout Padding="10" Spacing="10">
-                <Label  Text=" DISTANCE :" />
-                <Label  Text="{Binding Car.Distance ,StringFormat ='{0} KM' }" />
-                <Label  Text=" MOTORISATION :" />
-                <Label  Text="{Binding Car.Engine}" />
-                <Label  Text=" Id :" />
-                <Label  Text="{Binding Car.Id}" />
+
+                <Grid ColumnDefinitions="*,*">
+                        <Label  Text="Car Availablity :" 
+                                Grid.Column="0"
+                                FontSize="20" 
+                                TextColor="Black" 
+                                FontFamily="Bold" 
+                                HorizontalTextAlignment="Start"/>
+                        <Label  FontSize="20" 
+                                FontFamily="Bold" 
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="Start"
+                                Text="Available"
+                                TextColor="Green"
+                                Grid.Column="1">
+                            <Label.Triggers>
+                                <DataTrigger    TargetType="Label"
+                                                Binding="{Binding  Path=Car.Dispo}"
+                                                Value="false">
+                                    <Setter Property="Text" Value="Unavailable" />
+                                    <Setter Property="TextColor" Value="Red" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+                <Grid ColumnDefinitions="*,*">
+                    <Label  Text=" DISTANCE :"
+                            FontSize="20"
+                        TextColor="Black" 
+                        FontFamily="Bold" 
+                        HorizontalTextAlignment="Start" 
+                        />
+                    <Label  Text="{Binding Car.Distance ,StringFormat ='{0} KM' }" 
+                        Grid.Column="1"
+                        FontSize="20" 
+                        VerticalTextAlignment="Center"
+                        HorizontalOptions="Start"/>
+                </Grid>
+                <Label  
+                        Text=" MOTORISATION :" 
+                        FontSize="20" 
+                        TextColor="Black" 
+                        VerticalTextAlignment="Center"
+                        FontFamily="Bold" 
+                        HorizontalTextAlignment="Start"
+                        />
+                <Label  Text="{Binding Car.Engine}"
+                        FontSize="20" 
+                        HorizontalOptions="Start"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

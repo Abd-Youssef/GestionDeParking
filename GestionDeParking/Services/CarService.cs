@@ -35,6 +35,7 @@ namespace GestionDeParking.Services
                 Dispo = newCar.Dispo,
                 Engine = newCar.Engine,
                 Distance = newCar.Distance,
+                Price = newCar.Price,
             };
             if (newCar.Image is null)
             {
@@ -59,8 +60,7 @@ namespace GestionDeParking.Services
         public static async Task ModifyCar(Car car)
         {
             await Init();
-            await AddNewCar(car);
-            await RemoveCar(car.Id);
+            await db.UpdateAsync(car);
 
         }
 
@@ -71,8 +71,16 @@ namespace GestionDeParking.Services
             var car = await db.Table<Car>().ToListAsync();
             return car;
         }
+        public static async Task ChangeDispo(Car car)
+        {
 
-        
+            await Init();
+            car.Dispo = !car.Dispo;
+            await db.UpdateAsync(car);
+
+
+        }
+
     }
 }
 

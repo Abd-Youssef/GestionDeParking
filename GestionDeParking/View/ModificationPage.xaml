@@ -2,11 +2,50 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GestionDeParking.View.ModificationPage"
+             xmlns:viewmodel="clr-namespace:GestionDeParking.ViewModel"
+             x:DataType="viewmodel:ModificationPageViewModel"
              Title="ModificationPage">
     <ScrollView >
         <VerticalStackLayout
             Spacing="25"
             VerticalOptions="Start">
+
+
+            <Grid ColumnDefinitions="*,*">
+
+                <StackLayout Grid.Column="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ModificationPageViewModel}},Path=PickImage}"/>
+
+                    </StackLayout.GestureRecognizers>
+                    <Image Source="addbtn"  WidthRequest="50" HeightRequest="50"/>
+                    <Label Text="Add Car Photo" 
+                       FontSize="20" 
+                           TextColor="Black" 
+                           FontFamily="Bold" 
+                           HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                </StackLayout>
+                <StackLayout Grid.Column="1">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ModificationPageViewModel}},Path=CaptureImage}"/>
+
+                    </StackLayout.GestureRecognizers>
+                    <Image Source="takebtn"  WidthRequest="50" HeightRequest="50"/>
+                    <Label Text="Take Photo"
+                       FontSize="20" 
+                           TextColor="Black" 
+                           FontFamily="Bold" 
+                           HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                </StackLayout>
+            </Grid>
+            <Image  Source="{Binding Car.Image ,Mode=TwoWay}"
+                    Aspect="AspectFit" 
+                       MaximumWidthRequest="150"
+                       MaximumHeightRequest="200"/>
             <StackLayout Orientation="Vertical" Padding="20,0">
                 <Label Text="Marque" 
                        FontSize="20" 
@@ -21,7 +60,7 @@
                         HorizontalOptions="FillAndExpand">
                     <Entry x:Name="marque" 
                            
-                           Text="{Binding Car.Name ,Mode=TwoWay}"
+                           Text="{Binding Car.Marque ,Mode=TwoWay}"
                            VerticalOptions="Center" 
                            Placeholder="Car Marque..." 
                            Keyboard="Default" 
@@ -41,10 +80,30 @@
                         HeightRequest="45"  
                         HorizontalOptions="FillAndExpand">
                     <Entry x:Name="name"  
-                           Text="{Binding Car.Marque,Mode=TwoWay}"
+                           Text="{Binding Car.Name,Mode=TwoWay}"
                            VerticalOptions="Center" 
                            Placeholder="Car Model..." 
                            Keyboard="Default" 
+                           ClearButtonVisibility="WhileEditing"/>
+                </Frame>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Padding="20,0">
+                <Label Text="Price" 
+                       FontSize="20" 
+                       TextColor="Black" 
+                       FontFamily="Bold" 
+                       HorizontalTextAlignment="Start" 
+                       Padding="-10,5"/>
+                <Frame  Padding="0" 
+                        HasShadow="True" 
+                        BorderColor="White" 
+                        HeightRequest="45"  
+                        HorizontalOptions="FillAndExpand">
+                    <Entry x:Name="price"  
+                           Text="{Binding Car.Price,Mode=TwoWay}"
+                           VerticalOptions="Center" 
+                           Placeholder="DT/Day" 
+                           Keyboard="Numeric" 
                            ClearButtonVisibility="WhileEditing"/>
                 </Frame>
             </StackLayout>
@@ -87,7 +146,7 @@
                         <DataTrigger    TargetType="Label"
                                         Binding="{Binding Source={x:Reference DispoSwitch}, Path=IsToggled}"
                                         Value="false">
-                            <Setter Property="Text" Value="Not Available" />
+                                <Setter Property="Text" Value="Unavailable" />
                             <Setter Property="TextColor" Value="Red" />
                         </DataTrigger>
                     </Label.Triggers>

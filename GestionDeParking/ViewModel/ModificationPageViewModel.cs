@@ -16,14 +16,50 @@ namespace GestionDeParking.ViewModel
     {
         [ObservableProperty]
         Car car;
+        [ObservableProperty]
+        string mediaPath;
 
         [ICommand]
         public async void Modify()
         {
             await CarService.ModifyCar(car);
             await Shell.Current.GoToAsync("..");
-            IsBusy = true;
-            //await RefreshList();
+            MediaPath = null; MessagingCenter.Send<HomePageViewModel>(new HomePageViewModel(), "refresh");
+
+        }
+        public Command CaptureImage
+        {
+            get
+            {
+                return new Command(async (e) =>
+                {
+                    var photo = await MediaPicker.CapturePhotoAsync();
+                    var stream = await LoadPhotoAsync(photo);
+                });
+            }
+        }
+        public Command PickImage
+        {
+            get
+            {
+                return new Command(async (e) =>
+                {
+                    var photo = await MediaPicker.PickPhotoAsync();
+                    var stream = await LoadPhotoAsync(photo);
+                });
+            }
+        }
+        async Task<Stream> LoadPhotoAsync(FileResult photo)
+        {
+            if (photo == null)
+            {
+                return null;
+            }
+            Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+            var stream = await photo.OpenReadAsync();
+            Car.Image = photo.FullPath;
+            return stream;
         }
     }
+
 }

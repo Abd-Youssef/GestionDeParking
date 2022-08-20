@@ -7,7 +7,7 @@
              Title="HomePage"
              >
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="ADD" Command="{Binding GoToAddCommand}"/>
+        <ToolbarItem Text="Add Car" Command="{Binding GoToAddCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -19,38 +19,40 @@
                 RowDefinitions="*,*"
                    >
                 <SearchBar 
+                    x:Name="searchbar"
                             Placeholder="Search items..." 
+                            TextChanged="SearchBar"
                             Grid.ColumnSpan="2"
-                            Grid.Row="1"
+                            Grid.Row="0"
                            />
 
-                <Button Grid.Column="0" Grid.Row="0" 
+                <Button Grid.Column="0" Grid.Row="1" 
                         x:Name="btn1"
                             Text="All Cars" 
-                            WidthRequest="150"
+                            WidthRequest="120"
+                        HeightRequest="40"
                             TextColor="White" 
-                            FontSize="18" 
+                            FontSize="14" 
                             HorizontalOptions="Center" 
                             BackgroundColor="#0d172a" 
                             BorderWidth="0.5"
-                            Clicked="All_Clicked"/>
-                <Button Grid.Column="1" Grid.Row="0"
+                            Clicked="AllCars"/>
+                <Button Grid.Column="1" Grid.Row="1"
                         x:Name="btn2"
                         Text="Available Cars" 
-                            WidthRequest="150"
-                            
+                            WidthRequest="120"
+                            HeightRequest="40"
                             TextColor="#0d172a" 
-                            FontSize="18" 
+                            FontSize="14" 
                             HorizontalOptions="Center" 
                             BackgroundColor="White" 
                             BorderWidth="0.5"
-                            Clicked="Car_Clicked"/>
+                            Clicked="AvailableCars"/>
             </Grid>
             <ListView  
-                SelectedItem="{Binding SelectedCar ,Mode=TwoWay}"
-                      x:Name="Carliste" 
-                      HasUnevenRows="True"
-                      ItemsSource="{Binding NewCars}"
+                x:Name="Carliste" 
+                HasUnevenRows="True"
+                ItemsSource="{Binding NewCars}"
                 IsPullToRefreshEnabled="True"
                 IsRefreshing="{Binding IsBusy,Mode=OneWay}"
                 RefreshCommand="{Binding RefreshCommand }"
@@ -62,28 +64,28 @@
                             <Grid Padding="10" 
                                           ColumnDefinitions="Auto,*,auto"
                                           RowDefinitions="auto,auto,auto">
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=GoToDetailsCommand}"/>
 
-                                    </Grid.GestureRecognizers>
-                                    <Image 
+                                </Grid.GestureRecognizers>
+                                <Image 
+                                        Aspect="AspectFit"
                                                Grid.RowSpan="3"
                                                Source="{Binding Image}"
-                                               Aspect="AspectFill"
                                                HeightRequest="120"
                                                WidthRequest="150" />
-                                    <StackLayout Grid.Column="1"
+                                <StackLayout Grid.Column="1"
                                            Grid.RowSpan="3"
                                                  Spacing="20">
-                                        <Label Grid.Column="1"
+                                    <Label Grid.Column="1"
                                                Grid.Row="0"
                                                Text="{Binding Marque}"
                                                FontSize="16"
                                                VerticalOptions="End"
                                                HorizontalOptions="Center"
                                         />
-                                        <Label Grid.Column="1"
+                                    <Label Grid.Column="1"
                                                Grid.Row="1"
                                                Text="{Binding Name}"
                                                FontAttributes="Bold"
@@ -91,33 +93,31 @@
                                                VerticalOptions="Center"
                                                HorizontalOptions="Center"
                                         />
-                                        <Label 
+                                    <Label 
                                                Grid.Column="1"
                                                Grid.Row="2"
                                                VerticalOptions="Start"
                                                HorizontalOptions="Center"
                                                FontSize="16"
-                                               Text="{Binding Distance ,StringFormat ='{0} KM' }"/>
-                                    </StackLayout>
+                                               Text="{Binding Price ,StringFormat ='{0} DT/Day' }"/>
+                                </StackLayout>
 
-                                    <ImageButton Source="menu.png"
+                                <ImageButton Source="menu.png"
                                                  Grid.Column="2"
                                                  VerticalOptions="Start"
                                             HorizontalOptions="End"
                                             Grid.RowSpan="2"
                                             HeightRequest="50"
                                             WidthRequest="30">
-                                        <ImageButton.GestureRecognizers>
-                                            <TapGestureRecognizer CommandParameter="{Binding .}"
+                                    <ImageButton.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomePageViewModel}},Path=OpenPopupCommand}"/>
 
-                                        </ImageButton.GestureRecognizers>
+                                    </ImageButton.GestureRecognizers>
 
-                                    </ImageButton>
-                                
+                                </ImageButton>
+
                             </Grid>
-
-                            <!--</Frame>-->
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
